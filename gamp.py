@@ -1,5 +1,5 @@
 import numpy as np
-
+from huffman import *
 
 class gamp:
 
@@ -9,25 +9,33 @@ class gamp:
          percentage of sick patients ρ,
          false negative probability p1, false positive probability p2,
         measurements y, and matrix A."""
-        self.ro=ro
-        self.p1=p1
-        self.p2=p2
-        self.y=y
-        self.A=A
+        self.ro = ro
+        self.p1 = p1
+        self.p2 = p2
+        self.y = y
+        self.A = A
         self.mode = mode
         self.iter = iter
         self.threshold = threshold
         self.fit()
 
     def fit(self):
-        s=0
-        k=0
-        h=0
-        N=np.shape(self.A)[1]
-        M=np.shape(self.A)[0]
+        N = np.shape(self.A)[1]
+        M = np.shape(self.A)[0]
+
+        # Initializing parameters
+        s = np.zeros(N, 1)
+        k = np.zeros(M, 1)
+        x_hat = np.zeros(N, 1)
+        theta=np.matmul(np.matmul(self.A,self.A.transpose()),s)
+        h = np.zeros(M, 1)
+
+        all_h=[]
+        all_s=[]
+        all_xh=[]
 
         if self.mode:
-
+            print("Threshold not implemented")
         else:
             for i in range(self.iter):
-                theta=np.matmul(self.A,self.A)*s
+                theta = np.matmul(self.A, self.A) * s
